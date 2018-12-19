@@ -1,0 +1,6 @@
+.fab {
+  position: fixed;
+  zIndex: 999;
+  right: 2em;
+  bottom: 2em;
+}
