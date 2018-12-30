@@ -9,6 +9,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import './MaterialForm.css';
+import AddButton from './AddButton';
 
 class MaterialForm extends Component {
   constructor(props) {
@@ -51,12 +52,6 @@ class MaterialForm extends Component {
       height: '50%',
       transition: 'height 1s ease'
     };
-    const fabStyle = {
-      position: 'fixed',
-      zIndex: 999,
-      right: '2em',
-      bottom: '2em'
-    };
 
     const list = this.getRows().map(r =>(
       <ListItem key={r.id}>
@@ -73,12 +68,9 @@ class MaterialForm extends Component {
 
     return (
       <div>
-        <Button
-          //style={fabStyle}
-          className="fab"
-          variant="fab" color="primary" aria-label="Add">
-          <AddIcon />
-        </Button>
+        <AddButton>
+            <AddIcon />
+        </AddButton>
         <List>
           {list}
         </List>
