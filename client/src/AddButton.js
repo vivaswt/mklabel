@@ -15,14 +15,14 @@ const styles = theme => ({
 class AddButton extends Component {
     render() {
         const {classes} = this.props;
-        console.log(classes);
 
         return (
             <Button
                 classes={classes}
                 variant="fab"
                 color="primary"
-                aria-label="Add">
+                aria-label="Add"
+                onClick={this.props.onClick}>
                 <AddIcon />
             </Button>
         );
