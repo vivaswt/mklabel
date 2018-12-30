@@ -76,18 +76,18 @@ class RequestList extends Component {
   render() {
     const requests = this.props.requests;
     const materialStyle = {
-      'font-size': '11px',
+      'fontSize': '11px',
       width: '18em',
       margin: '0.25em'
     };
     const widthStyle = {
-      'font-size': '12px',
+      'fontSize': '12px',
       width: '6em',
       margin: '0.25em',
       'textAlign': 'right'
     };
     const pageStyle = {
-      'font-size': '12px',
+      'fontSize': '12px',
       width: '5em',
       margin: '0.25em',
       'textAlign': 'right'

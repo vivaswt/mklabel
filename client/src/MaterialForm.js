@@ -64,6 +64,7 @@ class MaterialForm extends Component {
   render() {
     const list = this.getRows().map(r => (
       <DetailListItem
+        key={r.id}
         id={r.id}
         primary={r.material}
         delete={r.delete}
@@ -73,7 +74,7 @@ class MaterialForm extends Component {
     return (
       <div>
         <Dialog
-          fullWidth="true"
+          fullWidth={true}
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title">
