@@ -28,11 +28,11 @@ const deleteStyles = theme => ({
 class DetailListItem extends Component {
     render() {
         const {classes} = this.props;
-        console.log(classes);
 
         return (
             <ListItem
-                key={this.props.id}
+                key={this.props.key}
+                id={this.props.id}
                 classes={{
                     container: (
                         this.props.delete ?

@@ -16,7 +16,8 @@ class MaterialForm extends Component {
     super(props);
 
     const state = {
-      open: false
+      open: false,
+      inputMaterial: ''
     };
 
     getMaterials().forEach((m, i) => {
@@ -25,16 +26,16 @@ class MaterialForm extends Component {
     });
 
     state.count = getMaterials().length;
-    console.log(state);
     this.state = state;
 
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
+    this.handleRegist = this.handleRegist.bind(this);
+    this.handleMaterialChange = this.handleMaterialChange.bind(this);
   }
 
   handleDeleteClick(id, e) {
-    console.log(`delete ${id}.`);
     this.setState({
       [`delete${id}`]: true
     });
@@ -48,24 +49,53 @@ class MaterialForm extends Component {
     this.setState({ open: true });
   }
 
-  getRows() {
+  handleRegist() {
+    this.setState(state => {
+      const rows = this.getRows(state);
+      rows.push({
+        id: state.count + 1,
+        material: state.inputMaterial,
+        delete: false
+      });
+
+      rows.sort((a, b) => a.material.localeCompare(b.material));
+
+      const newState = {};
+      for (let i = 0; i < rows.length; i++) {
+        newState[`material${i}`] = rows[i].material;
+        newState[`delete${i}`] = rows[i].delete;
+      }
+      newState.count = rows.length;
+      newState.inputMaterial = '';
+      newState.open = false;
+
+      return newState;
+    });
+  }
+
+  handleMaterialChange(event) {
+    this.setState({
+      inputMaterial: event.target.value
+    });
+  }
+
+  getRows(state) {
     const result = [];
-    for (let i = 0; i < this.state.count; i++) {
-      //if (this.state[`delete${i}`]) continue;
+    for (let i = 0; i < state.count; i++) {
       result.push({
         id: i,
-        material: this.state[`material${i}`],
-        delete: this.state[`delete${i}`]
+        material: state[`material${i}`],
+        delete: state[`delete${i}`]
       });
     }
     return result;
   }
 
   render() {
-    const list = this.getRows().map(r => (
+    const list = this.getRows(this.state).map(r => (
       <DetailListItem
         key={r.id}
-        id={r.id}
+        id={`row${r.id}`}
         primary={r.material}
         delete={r.delete}
         onDeleteClick={e => this.handleDeleteClick(r.id, e)} />
@@ -85,55 +115,57 @@ class MaterialForm extends Component {
               fullWidth
               margin="dense"
               id="material"
-              label="品名" />
+              label="品名"
+              value={this.state.inputMaterial}
+              onChange={this.handleMaterialChange} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
               キャンセル
             </Button>
-            <Button onClick={this.handleClose} color="primary">
+            <Button onClick={this.handleRegist} color="primary">
               登録
             </Button>
-            </DialogActions>
-          </Dialog>
-          <AddButton onClick={this.handleAdd}>
-            <AddIcon />
-          </AddButton>
-          <List>
-            {list}
-          </List>
+          </DialogActions>
+        </Dialog>
+        <AddButton onClick={this.handleAdd}>
+          <AddIcon />
+        </AddButton>
+        <List>
+          {list}
+        </List>
       </div>
-        );
-      }
-    }
-    
+    );
+  }
+}
+
 function getMaterials() {
   const result = [
-          "SP-8LKアオ(HGN11A)",
-          "SP-8Kアオ(HGN7)",
-          "SP-8Kアオ(HGN7)12R",
-          "SP-8Kアオ(HGN7)KUFゲンシ",
-          "SP-8Kアオ(HGN7)WT4(6.1R)",
-          "SP-8Kアオ(HGN7)WT4(12.2R)",
-          "KA-4GシロB",
-          "SP-8Eアオ(N6)",
-          "SP-ESFR78(N67)",
-          "SP-8Eアイボリー(N6)",
-          "SP-8Eアイボリー(N6)セマハバ",
-          "SP-8Eアイボリー(N6)9R",
-          "SP-4BCマルミズ",
-          "SP-4BCマルミズ(エージング)",
-          "SP-7Kアサギ(HGN7)(3%)",
-          "SP-7Kシロ(HGN7)(3%)",
-          "SP-7Kチャ",
-          "SP-8EAアイボリー",
-          "SP-8EBアイボリー",
-          "SP-8Eシロ",
-          "SP-8Eシロ(N6)",
-          "SP-8Eシロ(N6)セマハバ",
-          "SP-8KFアオ(L)ウチマキ"
-        ];
-        return result.sort();
-      }
-      
-export {MaterialForm};
+    "SP-8LKアオ(HGN11A)",
+    "SP-8Kアオ(HGN7)",
+    "SP-8Kアオ(HGN7)12R",
+    "SP-8Kアオ(HGN7)KUFゲンシ",
+    "SP-8Kアオ(HGN7)WT4(6.1R)",
+    "SP-8Kアオ(HGN7)WT4(12.2R)",
+    "KA-4GシロB",
+    "SP-8Eアオ(N6)",
+    "SP-ESFR78(N67)",
+    "SP-8Eアイボリー(N6)",
+    "SP-8Eアイボリー(N6)セマハバ",
+    "SP-8Eアイボリー(N6)9R",
+    "SP-4BCマルミズ",
+    "SP-4BCマルミズ(エージング)",
+    "SP-7Kアサギ(HGN7)(3%)",
+    "SP-7Kシロ(HGN7)(3%)",
+    "SP-7Kチャ",
+    "SP-8EAアイボリー",
+    "SP-8EBアイボリー",
+    "SP-8Eシロ",
+    "SP-8Eシロ(N6)",
+    "SP-8Eシロ(N6)セマハバ",
+    "SP-8KFアオ(L)ウチマキ"
+  ];
+  return result.sort();
+}
+
+export { MaterialForm };
