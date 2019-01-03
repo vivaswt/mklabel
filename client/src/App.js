@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {RequestForm} from './RequestForm.js'
 import {MaterialForm} from './MaterialForm.js';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
+import {WidthForm} from './WidthForm.js';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -11,7 +10,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 class App extends Component {
@@ -22,7 +20,6 @@ class App extends Component {
       menu: 0,
       menuOpen: false,
       requests: createRequests(),
-      materials: getMaterials(),
       widths: getWidths()
     };
 
@@ -88,14 +85,14 @@ class App extends Component {
           changeOpenState={this.handleMenuOpen}
           changeMenu={this.handleMenuChange}
           />
-        {menu == 0 && <RequestForm
+        {menu === 0 && <RequestForm
           requests={this.state.requests}
-          materials={this.state.materials}
           widths={this.state.widths}
           onMaterialChange={this.handleMaterialChange}
           onWidthChange={this.handleWidthChange}
           onPageChange={this.handlePageChange} />}
-        {menu == 1 && <MaterialForm materials={this.state.materials}/>}
+        {menu === 1 && <MaterialForm />}
+        {menu === 2 && <WidthForm />}
       </div>
     );
   }
@@ -162,35 +159,6 @@ function createRequests() {
     });
   }
   return requests;
-}
-
-function getMaterials() {
-  const result = [
-    "SP-8LKアオ(HGN11A)",
-    "SP-8Kアオ(HGN7)",
-    "SP-8Kアオ(HGN7)12R",
-    "SP-8Kアオ(HGN7)KUFゲンシ",
-    "SP-8Kアオ(HGN7)WT4(6.1R)",
-    "SP-8Kアオ(HGN7)WT4(12.2R)",
-    "KA-4GシロB",
-    "SP-8Eアオ(N6)",
-    "SP-ESFR78(N67)",
-    "SP-8Eアイボリー(N6)",
-    "SP-8Eアイボリー(N6)セマハバ",
-    "SP-8Eアイボリー(N6)9R",
-    "SP-4BCマルミズ",
-    "SP-4BCマルミズ(エージング)",
-    "SP-7Kアサギ(HGN7)(3%)",
-    "SP-7Kシロ(HGN7)(3%)",
-    "SP-7Kチャ",
-    "SP-8EAアイボリー",
-    "SP-8EBアイボリー",
-    "SP-8Eシロ",
-    "SP-8Eシロ(N6)",
-    "SP-8Eシロ(N6)セマハバ",
-    "SP-8KFアオ(L)ウチマキ"
-  ];
-  return result.sort();
 }
 
 function getWidths() {

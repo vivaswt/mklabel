@@ -9,30 +9,30 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import {saveMaterials, loadMaterials} from './Material';
+import {saveWidths, loadWidths} from './Width';
 
-class MaterialForm extends Component {
+class WidthForm extends Component {
   constructor(props) {
     super(props);
 
     const state = {
       open: false,
-      inputMaterial: ''
+      inputWidth: ''
     };
 
-    loadMaterials().forEach((m, i) => {
-      state[`material${i}`] = m;
+    loadWidths().forEach((w, i) => {
+      state[`width${i}`] = w;
       state[`delete${i}`] = false;
     });
 
-    state.count = loadMaterials().length;
+    state.count = loadWidths().length;
     this.state = state;
 
     this.handleDeleteClick = this.handleDeleteClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
     this.handleAdd = this.handleAdd.bind(this);
     this.handleRegist = this.handleRegist.bind(this);
-    this.handleMaterialChange = this.handleMaterialChange.bind(this);
+    this.handleWidthChange = this.handleWidthChange.bind(this);
   }
 
   handleDeleteClick(id, e) {
@@ -49,26 +49,26 @@ class MaterialForm extends Component {
     this.setState({ open: true });
   }
 
-  materials(state) {
+  widths(state) {
     const result = [];
     for (let i = 0; i < state.count; i++) {
       if (state[`delete${i}`]) continue;
-        result.push(state[`material${i}`]);
+        result.push(state[`width${i}`]);
     }
     return result;
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.dataChanged(prevState, this.state)) {
-      const materials = this.materials(this.state);
-      saveMaterials(materials);
+      const widths = this.widths(this.state);
+      saveWidths(widths);
     }
   }
 
   dataChanged(prevState, state) {
     if (prevState.count !== state.count) return true;
     for (let i = 0; i < state.count; i++) {
-      if (prevState[`material${i}`] !== state[`material${i}`]) return true;
+      if (prevState[`width${i}`] !== state[`width${i}`]) return true;
       if (prevState[`delete${i}`] !== state[`delete${i}`]) return true;
     }
     return false;
@@ -79,28 +79,28 @@ class MaterialForm extends Component {
       const rows = this.getRows(state);
       rows.push({
         id: state.count + 1,
-        material: state.inputMaterial,
+        width: state.inputWidth,
         delete: false
       });
 
-      rows.sort((a, b) => a.material.localeCompare(b.material));
+      rows.sort((a, b) => a.width - b.width);
 
       const newState = {};
       for (let i = 0; i < rows.length; i++) {
-        newState[`material${i}`] = rows[i].material;
+        newState[`width${i}`] = rows[i].width;
         newState[`delete${i}`] = rows[i].delete;
       }
       newState.count = rows.length;
-      newState.inputMaterial = '';
+      newState.inputWidth = '';
       newState.open = false;
 
       return newState;
     });
   }
 
-  handleMaterialChange(event) {
+  handleWidthChange(event) {
     this.setState({
-      inputMaterial: event.target.value
+      inputWidth: event.target.value
     });
   }
 
@@ -109,7 +109,7 @@ class MaterialForm extends Component {
     for (let i = 0; i < state.count; i++) {
       result.push({
         id: i,
-        material: state[`material${i}`],
+        width: state[`width${i}`],
         delete: state[`delete${i}`]
       });
     }
@@ -121,7 +121,7 @@ class MaterialForm extends Component {
       <DetailListItem
         key={r.id}
         id={`row${r.id}`}
-        primary={r.material}
+        primary={r.width}
         delete={r.delete}
         onDeleteClick={e => this.handleDeleteClick(r.id, e)} />
     ));
@@ -133,16 +133,16 @@ class MaterialForm extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">品名追加</DialogTitle>
+          <DialogTitle id="form-dialog-title">巾追加</DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
               fullWidth
               margin="dense"
-              id="material"
-              label="品名"
-              value={this.state.inputMaterial}
-              onChange={this.handleMaterialChange} />
+              id="width"
+              label="巾"
+              value={this.state.inputWidth}
+              onChange={this.handleWidthChange} />
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
@@ -164,4 +164,4 @@ class MaterialForm extends Component {
   }
 }
 
-export { MaterialForm };
+export { WidthForm };
