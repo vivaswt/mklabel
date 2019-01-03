@@ -20,7 +20,6 @@ class App extends Component {
       menu: 0,
       menuOpen: false,
       requests: createRequests(),
-      widths: getWidths()
     };
 
     this.handleMenuChange = this.handleMenuChange.bind(this);
@@ -87,7 +86,6 @@ class App extends Component {
           />
         {menu === 0 && <RequestForm
           requests={this.state.requests}
-          widths={this.state.widths}
           onMaterialChange={this.handleMaterialChange}
           onWidthChange={this.handleWidthChange}
           onPageChange={this.handlePageChange} />}
