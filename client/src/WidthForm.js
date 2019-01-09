@@ -79,7 +79,7 @@ class WidthForm extends Component {
       const rows = this.getRows(state);
       rows.push({
         id: state.count + 1,
-        width: state.inputWidth,
+        width: parseInt(state.inputWidth),
         delete: false
       });
 
