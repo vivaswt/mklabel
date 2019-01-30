@@ -1,10 +1,10 @@
 function defaultRequests() {
-    let requests = new Map();
-    for (let i = 0; i < 10; i++) {
-      requests.set(i, {
-        material: '',
-        width: '',
-        page: 0
+    let requests = [];
+    for (let i = 0; i < 3; i++) {
+      requests.push({
+        material: 'SP-8Kアオ(HGN7)',
+        width: 1000,
+        page: 1
       });
     }
     return requests;
