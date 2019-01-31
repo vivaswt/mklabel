@@ -26,8 +26,8 @@ class App extends Component {
     return (
       <div>
         {menu === 0 && <RequestForm onMenuChange={this.handleMenuChange} />}
-        {menu === 1 && <MaterialForm />}
-        {menu === 2 && <WidthForm />}
+        {menu === 1 && <MaterialForm onMenuChange={this.handleMenuChange} />}
+        {menu === 2 && <WidthForm onMenuChange={this.handleMenuChange} />}
       </div>
     );
   }

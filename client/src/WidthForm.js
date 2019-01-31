@@ -10,6 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import {saveWidths, loadWidths} from './Width';
+import AppHeader from './AppHeader';
 
 class WidthForm extends Component {
   constructor(props) {
@@ -156,6 +157,12 @@ class WidthForm extends Component {
         <AddButton onClick={this.handleAdd}>
           <AddIcon />
         </AddButton>
+
+        <AppHeader
+          onMenuChange={this.props.onMenuChange}
+          title="巾設定">
+        </AppHeader>        
+
         <List>
           {list}
         </List>
