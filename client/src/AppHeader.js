@@ -4,6 +4,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SideList from './SideList.js';
+import { withStyles } from '@material-ui/core';
+
+const styles = theme => ({
+  appBarSpacer: theme.mixins.toolbar
+});
 
 class AppHeader extends Component {
   constructor(props) {
@@ -23,9 +28,11 @@ class AppHeader extends Component {
   }
 
   render() {
+    const {classes} = this.props;
+    
     return (
       <div>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Toolbar>
             <IconButton
               color="inherit"
@@ -42,9 +49,11 @@ class AppHeader extends Component {
           changeOpenState={this.handleSideListOpen}
           onMenuChange={this.props.onMenuChange}
         />
+
+        <div className={classes.appBarSpacer}></div>
       </div>
     );
   }
 }
 
-export default AppHeader;
+export default withStyles(styles)(AppHeader);
