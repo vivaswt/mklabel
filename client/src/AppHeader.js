@@ -29,7 +29,7 @@ class AppHeader extends Component {
 
   render() {
     const {classes} = this.props;
-    
+
     return (
       <div>
         <AppBar position="fixed">
@@ -44,13 +44,14 @@ class AppHeader extends Component {
           </Toolbar>
         </AppBar>
 
+        <div className={classes.appBarSpacer}></div>
+
         <SideList
           open={this.state.sideListOpen}
           changeOpenState={this.handleSideListOpen}
           onMenuChange={this.props.onMenuChange}
         />
 
-        <div className={classes.appBarSpacer}></div>
       </div>
     );
   }

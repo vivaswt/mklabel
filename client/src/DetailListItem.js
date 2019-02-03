@@ -8,17 +8,14 @@ import { withStyles } from "@material-ui/core/styles";
 
 const styles = theme => ({
     container: {
-        height: '3em'
+        listStyle: 'none',
+        height: '3em',
+        '&:hover': {
+            backgroundColor: 'lightGray'
+        }
     },
     containerDelete: {
-        overflow: 'hidden',
-        height: '0em',
-        transition: 'height 300ms 0s ease'
-    }
-});
-
-const deleteStyles = theme => ({
-    container: {
+        listStyle: 'none',
         overflow: 'hidden',
         height: '0em',
         transition: 'height 300ms 0s ease'
@@ -27,7 +24,7 @@ const deleteStyles = theme => ({
 
 class DetailListItem extends Component {
     render() {
-        const {classes} = this.props;
+        const { classes } = this.props;
 
         return (
             <ListItem
@@ -36,18 +33,18 @@ class DetailListItem extends Component {
                 classes={{
                     container: (
                         this.props.delete ?
-                        classes.containerDelete :
-                        classes.container
+                            classes.containerDelete :
+                            classes.container
                     )
                 }}>
                 <ListItemText primary={this.props.primary} />
-                <ListItemSecondaryAction>
-                    <IconButton
+                {<ListItemSecondaryAction>
+                    {<IconButton
                         aria-label="Delete"
                         onClick={this.props.onDeleteClick}>
                         <DeleteIcon />
-                    </IconButton>
-                </ListItemSecondaryAction>
+                    </IconButton>}
+                </ListItemSecondaryAction>}
             </ListItem>
         );
     }

@@ -13,11 +13,11 @@ function defaultRequests() {
 const storageKey = 'requests';
 
 function saveRequests(requests) {
-    localStorage.setItem(storageKey, JSON.stringify(requests));
+    sessionStorage.setItem(storageKey, JSON.stringify(requests));
 }
 
 function loadRequests() {
-    const item = localStorage.getItem(storageKey);
+    const item = sessionStorage.getItem(storageKey);
     if (!item) {
         return defaultRequests();
     }
