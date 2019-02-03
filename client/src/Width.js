@@ -1,7 +1,5 @@
 function defaultWidths() {
     const result = [
-        785,
-        905,
         1000,
         1020,
         1040,
@@ -9,7 +7,7 @@ function defaultWidths() {
         1120,
         1230
     ];
-      return result.sort();    
+    return result.sort();    
 }
 
 const storageKey = 'widths';

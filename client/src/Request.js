@@ -1,13 +1,5 @@
 function defaultRequests() {
-    let requests = [];
-    for (let i = 0; i < 3; i++) {
-      requests.push({
-        material: 'SP-8Kアオ(HGN7)',
-        width: 1000,
-        page: 1
-      });
-    }
-    return requests;
+    return [];
   }
 
 const storageKey = 'requests';

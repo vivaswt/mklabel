@@ -22,7 +22,7 @@ class WidthForm extends Component {
     };
 
     loadWidths().forEach((w, i) => {
-      state[`width${i}`] = w;
+      state[`width${i}`] = parseInt(w);
       state[`delete${i}`] = false;
     });
 
