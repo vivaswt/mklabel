@@ -7,16 +7,11 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    document.title = "ラベル作成"
     this.state = {
       menu: 0
     };
 
     this.handleMenuChange = this.handleMenuChange.bind(this);
-  }
-
-  componentDidMount() {
-    
   }
 
   handleMenuChange(value) {
